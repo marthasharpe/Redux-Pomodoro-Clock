@@ -1,17 +1,15 @@
 import React from 'react';
-import Counter from './components/Counter';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import reducer from './reducers/index';
-
-const store = createStore(reducer);
+import BreakTime from './components/BreakTime'
 
 const App = () => {
-  return (
-    <Provider store={store}>
-      <Counter />
-    </Provider>
-  );
+    return (
+        <div className='text-center'>
+            <h2>React-Redux App</h2>
+            <BreakTime />
+        </div>
+    )
 }
+
+
 
 export default App;
