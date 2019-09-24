@@ -3,6 +3,7 @@ import BreakTime from './components/BreakTime';
 import SessionTime from './components/SessionTime';
 import './App.css';
 import TimeDisplay from './components/TimeDisplay';
+import Buttons from './components/Buttons';
 
 const App = () => {
     return (
@@ -13,6 +14,7 @@ const App = () => {
                 <SessionTime />
             </div>
             <TimeDisplay />
+            {/* <Buttons /> */}
         </div>
     )
 }
