@@ -1,0 +1,12 @@
+.display-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#time-left {
+    font-size: 2rem;
+    padding: 1rem;
+    background: black;
+    color: greenyellow;
+}
