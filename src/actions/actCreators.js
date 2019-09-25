@@ -24,7 +24,8 @@ export const decSession = () => ({
         type: DEC_SESSION
     })
 
-export const startTime = () => ({
+export const startTime = () => (
+    {
         type: START_TIMER
     })
 

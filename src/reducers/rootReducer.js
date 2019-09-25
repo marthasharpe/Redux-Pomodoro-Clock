@@ -66,5 +66,3 @@ const rootReducer = (state = initialState, action) => {
 }
 
 export default rootReducer;
-
-//if the timer is running I want the seconds to decrement by one per second and the minutes to decrement by one per minute

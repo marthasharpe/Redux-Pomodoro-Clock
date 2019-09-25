@@ -2,8 +2,7 @@ import React from 'react';
 import BreakTime from './components/BreakTime';
 import SessionTime from './components/SessionTime';
 import './App.css';
-import TimeDisplay from './components/TimeDisplay';
-import Buttons from './components/Buttons';
+import Timer from './components/Timer';
 
 const App = () => {
     return (
@@ -13,8 +12,7 @@ const App = () => {
                 <BreakTime />
                 <SessionTime />
             </div>
-            <TimeDisplay />
-            <Buttons />
+            <Timer />
         </div>
     )
 }
