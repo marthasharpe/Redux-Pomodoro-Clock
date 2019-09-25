@@ -11,4 +11,6 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
+    text-align: center;
+    background: rgb(94, 155, 255);
 }

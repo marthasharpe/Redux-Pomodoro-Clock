@@ -1,23 +1,23 @@
 import React from 'react';
-import './BreakTime.css';
+import './Buttons.css';
 import { connect } from 'react-redux';
-import {  } from '../actions/actCreators';
+import { startTime, stopTime, resetTime } from '../actions/actCreators';
 
-const Buttons = ({ }) => {
+const Buttons = ({ running, stopTime, startTime, resetTime }) => {
     return (
-        <div className='button-container'>
+        <div className='buttons-container'>
             <button
-                className='button-child'
+                className='button'
                 id='start-stop'
-                onClick={}
+                onClick={running ? stopTime : startTime}
             >
             Start/Stop
             </button>
 
             <button
-                className='button-child'
+                className='button'
                 id='reset'
-                onClick={}
+                onClick={resetTime}
             >
             Reset
             </button>
@@ -25,12 +25,14 @@ const Buttons = ({ }) => {
     )
 }
 
-const mapStateToProps = ({  }) => ({
-    
+const mapStateToProps = ({ running }) => ({
+    running
 })
 
 const mapDispatchToProps = {
-
+    startTime,
+    stopTime,
+    resetTime,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Buttons)

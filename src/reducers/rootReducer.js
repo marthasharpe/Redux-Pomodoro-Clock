@@ -12,7 +12,7 @@ const initialState = {
     breakLength: 5,
     sessionLength: 25,
     interval: 'Work',
-    timeLeft: '25:00',
+    timeLeft: 25,
     running: false,
 }
 
@@ -49,15 +49,15 @@ const rootReducer = (state = initialState, action) => {
                 running: false,
             }    
         case RESET_TIMER:
-            if (state.interval === 'Session') {
+            if (state.interval === 'Work') {
                 return {
                     ...state,
-                    timeLeft: '25:00'
+                    timeLeft: 25
                 }
             } else {
                 return {
                     ...state,
-                    timeLeft: '05:00'
+                    timeLeft: 5
                 }
             }
         default:
@@ -66,3 +66,5 @@ const rootReducer = (state = initialState, action) => {
 }
 
 export default rootReducer;
+
+//if the timer is running I want the seconds to decrement by one per second and the minutes to decrement by one per minute

@@ -14,7 +14,7 @@ const App = () => {
                 <SessionTime />
             </div>
             <TimeDisplay />
-            {/* <Buttons /> */}
+            <Buttons />
         </div>
     )
 }
