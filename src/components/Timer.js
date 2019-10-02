@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import './Timer.css';
 import { connect } from 'react-redux';
-import { startTimer, stopTimer, resetTimer } from '../actions/actCreators';
+import Reset from './Reset';
+import StartStop from './StartStop';
 
-const Timer = ({ interval, timerRunning, secondsLeft, stopTimer, startTimer, resetTimer}) => {
+const Timer = ({ timerRunning, secondsLeft, interval }) => {
 
     let minutes = Math.floor(secondsLeft / 60);
     let seconds = secondsLeft - minutes * 60;
@@ -42,35 +43,16 @@ const Timer = ({ interval, timerRunning, secondsLeft, stopTimer, startTimer, res
             <h2 id='timer-label'>{interval}</h2>
             <div id='time-left'>{minutes < 10 ? ("0" + minutes).slice(-2) : minutes}:{seconds < 10 ? ("0" + seconds).slice(-2) : seconds}</div>
 
-            <button
-                className='button-child'
-                id='start-stop'
-                onClick={timerRunning ? stopTimer : startTimer}
-            >
-            Start/Stop
-            </button>
-
-            <button
-                className='button-child'
-                id='reset'
-                onClick={resetTimer}
-            >
-            Reset
-            </button>
+            <StartStop />
+            <Reset />
         </div>
     )
 }
 
-const mapStateToProps = ({ interval, secondsLeft, timerRunning }) => ({
-    interval,
+const mapStateToProps = ({ secondsLeft, timerRunning, interval }) => ({
     secondsLeft,
-    timerRunning
+    timerRunning,
+    interval
 })
 
-const mapDispatchToProps = {
-    startTimer,
-    stopTimer,
-    resetTimer,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Timer)
+export default connect(mapStateToProps, null)(Timer)
