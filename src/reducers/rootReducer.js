@@ -5,15 +5,16 @@ import {
     DEC_SESSION,
     START_TIMER,
     STOP_TIMER,
-    RESET_TIMER
-} from '../actions/actTypes';
+    RESET_TIMER,
+    SWITCH_INTERVAL,
+} from '../actions/actCreators';
 
 const initialState = {
     breakLength: 5,
     sessionLength: 25,
-    interval: 'Work',
-    timeLeft: 25,
-    running: false,
+    interval: 'Session',
+    secondsLeft: 25 * 60,
+    timerRunning: false,
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -39,26 +40,30 @@ const rootReducer = (state = initialState, action) => {
                 sessionLength: state.sessionLength - 1
             }
         case START_TIMER:
+            console.log('start')
             return {
                 ...state,
-                running: true,
+                timerRunning: true,
             }
         case STOP_TIMER:
+            console.log('stop')
             return {
                 ...state,
-                running: false,
+                timerRunning: false,
             }    
         case RESET_TIMER:
-            if (state.interval === 'Work') {
-                return {
-                    ...state,
-                    timeLeft: 25
-                }
-            } else {
-                return {
-                    ...state,
-                    timeLeft: 5
-                }
+            console.log('reset')
+            return {
+                breakLength: 5,
+                sessionLength: 25,
+                interval: 'Session',
+                secondsLeft: 25 * 60,
+                timerRunning: false,
+            }
+        case SWITCH_INTERVAL:
+            console.log('switch')
+            return {
+                ...state
             }
         default:
             return state;

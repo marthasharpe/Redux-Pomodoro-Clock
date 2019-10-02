@@ -6,7 +6,7 @@ import { incBreak, decBreak } from '../actions/actCreators';
 const BreakTime = ({ breakLength, handleBreakInc, handleBreakDec}) => {
     return (
         <div className='breaktime-container'>
-            <h2 id='break-label'>Break Time</h2>
+            <h2 id='break-label'>Break Length</h2>
             <div className='button-container'>
                 <button
                     className='button-child'

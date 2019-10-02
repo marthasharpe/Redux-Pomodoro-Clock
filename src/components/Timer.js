@@ -1,13 +1,41 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Timer.css';
 import { connect } from 'react-redux';
-import { startTime, stopTime, resetTime } from '../actions/actCreators';
+import { startTimer, stopTimer, resetTimer } from '../actions/actCreators';
 
-const Timer = ({ interval, running, timeLeft, stopTime, startTime, resetTime}) => {
+const Timer = ({ interval, timerRunning, secondsLeft, stopTimer, startTimer, resetTimer}) => {
 
-    let time = timeLeft * 60;
-    let minutes = Math.floor(time / 60);
-    let seconds = (time % 60);
+    let minutes = Math.floor(secondsLeft / 60);
+    let seconds = secondsLeft - minutes * 60;
+
+    useEffect(() => {
+        // const handleSwitch = () => {
+        //     console.log('switch');
+        //     if (timerLabel === 'Session') {
+        //         setTimerLabel('Break');
+        //         setSecondsLeft(breakLength * 60);
+        //     } else if (timerLabel === 'Break') {
+        //         setTimerLabel('Session');
+        //         setSecondsLeft(sessionLength * 60);
+        //     }
+        // }
+        
+    //     let countdown = null;
+    //     if (timerRunning && secondsLeft > 0) {
+    //         countdown = setInterval(() => {
+    //             setSecondsLeft(secondsLeft - 1);
+    //         }, 1000);
+    //     } else if (timerRunning && secondsLeft === 0) {
+    //         countdown = setInterval(() => {
+    //             setSecondsLeft(secondsLeft - 1);
+    //         }, 1000);
+    //         handleSwitch();
+    //     } else {
+    //         clearInterval(countdown);
+    //     }
+    //     return () => clearInterval(countdown);
+    },
+    [timerRunning, secondsLeft]);
 
     return(
         <div className='timer-container'>
@@ -17,7 +45,7 @@ const Timer = ({ interval, running, timeLeft, stopTime, startTime, resetTime}) =
             <button
                 className='button-child'
                 id='start-stop'
-                onClick={running ? stopTime : startTime}
+                onClick={timerRunning ? stopTimer : startTimer}
             >
             Start/Stop
             </button>
@@ -25,7 +53,7 @@ const Timer = ({ interval, running, timeLeft, stopTime, startTime, resetTime}) =
             <button
                 className='button-child'
                 id='reset'
-                onClick={resetTime}
+                onClick={resetTimer}
             >
             Reset
             </button>
@@ -33,16 +61,16 @@ const Timer = ({ interval, running, timeLeft, stopTime, startTime, resetTime}) =
     )
 }
 
-const mapStateToProps = ({ interval, timeLeft, running }) => ({
+const mapStateToProps = ({ interval, secondsLeft, timerRunning }) => ({
     interval,
-    timeLeft,
-    running
+    secondsLeft,
+    timerRunning
 })
 
 const mapDispatchToProps = {
-    startTime,
-    stopTime,
-    resetTime,
+    startTimer,
+    stopTimer,
+    resetTimer,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timer)

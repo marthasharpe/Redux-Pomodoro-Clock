@@ -6,7 +6,7 @@ import { incSession, decSession } from '../actions/actCreators';
 const SessionTime = ({ sessionLength, handleSessionInc, handleSessionDec}) => {
     return (
         <div className='sessiontime-container'>
-            <h2 id='session-label'>Work Time</h2>
+            <h2 id='session-label'>Session Length</h2>
             <div className='button-container'>
                 <button
                     className='button-child'
