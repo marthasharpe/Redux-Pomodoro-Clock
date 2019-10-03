@@ -20,25 +20,39 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
     switch(action.type) {
         case INC_BREAK:
-            return {
-                ...state,
-                breakLength: state.breakLength + 1
-            }    
+            if (!state.timerRunning && state.breakLength < 60) {
+                return {
+                    ...state,
+                    breakLength: state.breakLength + 1,
+                }    
+            }
+            break;
         case DEC_BREAK:
-            return {
-                ...state,
-                breakLength: state.breakLength - 1
+            if (!state.timerRunning && state.breakLength > 1) {
+                return {
+                    ...state,
+                    breakLength: state.breakLength - 1,
+                }    
             }
+            break;
         case INC_SESSION:
-            return {
-                ...state,
-                sessionLength: state.sessionLength + 1
-            }    
-        case DEC_SESSION:
-            return {
-                ...state,
-                sessionLength: state.sessionLength - 1
+            if (!state.timerRunning && state.sessionLength < 60) {
+                return {
+                    ...state,
+                    sessionLength: state.sessionLength + 1,
+                    secondsLeft: (state.sessionLength + 1) * 60
+                }    
             }
+            break;
+        case DEC_SESSION:
+        if (!state.timerRunning && state.sessionLength > 1) {
+            return {
+                ...state,
+                sessionLength: state.sessionLength - 1,
+                secondsLeft: (state.sessionLength - 1) * 60
+            }    
+        }
+        break;
         case START_TIMER:
             console.log('start')
             return {

@@ -9,8 +9,8 @@ const App = () => {
         <div className='App-container'>
             <h1>React-Redux Pomodoro Clock</h1>
             <div className='set-time-container'>
-                <BreakTime />
                 <SessionTime />
+                <BreakTime />
             </div>
             <Timer />
         </div>
