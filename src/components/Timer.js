@@ -12,16 +12,7 @@ const Timer = ({ timerRunning, secondsLeft, interval, switchBreak, switchSession
     let minutes = Math.floor(secondsLeft / 60);
     let seconds = secondsLeft - minutes * 60;
 
-    useEffect(() => {
-        const handleSwitch = () => {
-            console.log('switch');
-            if (interval === 'Session') {
-                switchBreak();
-            } else if (interval === 'Break') {
-                switchSession();
-            }
-        }
-        
+    useEffect(() => {       
         let countdown = null;
         if (timerRunning && secondsLeft > 0) {
             countdown = setInterval(() => {
@@ -32,7 +23,11 @@ const Timer = ({ timerRunning, secondsLeft, interval, switchBreak, switchSession
                 decSeconds();
             }, 1000);
             audio.play();
-            handleSwitch();
+            if (interval === 'Session') {
+                switchBreak();
+            } else if (interval === 'Break') {
+                switchSession();
+            }
         } else {
             clearInterval(countdown);
         }
