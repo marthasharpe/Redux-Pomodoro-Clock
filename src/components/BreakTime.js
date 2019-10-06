@@ -3,7 +3,7 @@ import './BreakTime.css';
 import { connect } from 'react-redux';
 import { incBreak, decBreak } from '../actions/actCreators';
 
-const BreakTime = ({ breakLength, handleBreakInc, handleBreakDec}) => {
+const BreakTime = ({ breakLength, incBreak, decBreak}) => {
     return (
         <div className='breaktime-container'>
             <h2 id='break-label'>Break Length</h2>
@@ -11,7 +11,7 @@ const BreakTime = ({ breakLength, handleBreakInc, handleBreakDec}) => {
                 <button
                     className='button-child'
                     id='break-increment'
-                    onClick={handleBreakInc}
+                    onClick={incBreak}
                 >
                 +
                 </button>
@@ -26,7 +26,7 @@ const BreakTime = ({ breakLength, handleBreakInc, handleBreakDec}) => {
                 <button
                     className='button-child'
                     id='break-decrement'
-                    onClick={handleBreakDec}
+                    onClick={decBreak}
                 >
                 -
                 </button>
@@ -40,8 +40,8 @@ const mapStateToProps = ({ breakLength }) => ({
 })
 
 const mapDispatchToProps = {
-    handleBreakInc: incBreak,
-    handleBreakDec: decBreak,
+    incBreak,
+    decBreak,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BreakTime)

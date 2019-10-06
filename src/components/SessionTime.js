@@ -3,7 +3,7 @@ import './SessionTime.css';
 import { connect } from 'react-redux';
 import { incSession, decSession } from '../actions/actCreators';
 
-const SessionTime = ({ sessionLength, handleSessionInc, handleSessionDec}) => {
+const SessionTime = ({ sessionLength, incSession, decSession}) => {
     return (
         <div className='sessiontime-container'>
             <h2 id='session-label'>Session Length</h2>
@@ -11,7 +11,7 @@ const SessionTime = ({ sessionLength, handleSessionInc, handleSessionDec}) => {
                 <button
                     className='button-child'
                     id='session-increment'
-                    onClick={handleSessionInc}
+                    onClick={incSession}
                 >
                 +
                 </button>
@@ -26,7 +26,7 @@ const SessionTime = ({ sessionLength, handleSessionInc, handleSessionDec}) => {
                 <button
                     className='button-child'
                     id='session-decrement'
-                    onClick={handleSessionDec}
+                    onClick={decSession}
                 >
                 -
                 </button>
@@ -40,8 +40,8 @@ const mapStateToProps = ({ sessionLength }) => ({
 })
 
 const mapDispatchToProps = {
-    handleSessionInc: incSession,
-    handleSessionDec: decSession,
+    incSession,
+    decSession
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SessionTime)

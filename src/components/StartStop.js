@@ -16,9 +16,9 @@ const StartStop = ({ timerRunning, startTimer, stopTimer }) => {
     )
 }
 
-const mapStateToProps = ({ timerRunning }) => ({
-    timerRunning
-})
+const mapStateToProps = ({ timerRunning }) => {
+    return {timerRunning};
+}
 
 const mapDispatchToProps = {
     startTimer,

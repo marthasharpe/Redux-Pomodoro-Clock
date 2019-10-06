@@ -5,7 +5,9 @@ export const DEC_SESSION = 'DEC_SESSION';
 export const START_TIMER = 'START_TIMER';
 export const STOP_TIMER = 'STOP_TIMER';
 export const RESET_TIMER = 'RESET_TIMER';
-export const SWITCH_INTERVAL = 'SWITCH_INTERVAL';
+export const SWITCH_BREAK = 'SWITCH_BREAK';
+export const SWITCH_SESSION = 'SWITCH_SESSION';
+export const DEC_SECONDS = 'DEC_SECONDS';
 
 export const incBreak = () => ({
         type: INC_BREAK
@@ -36,6 +38,14 @@ export const resetTimer = () => ({
         type: RESET_TIMER
     })
 
-export const handleSwitch = () => ({
-        type: SWITCH_INTERVAL
+export const switchBreak = () => ({
+        type: SWITCH_BREAK
+    })
+
+export const switchSession = () => ({
+        type: SWITCH_SESSION
+    })
+
+export const decSeconds = () => ({
+        type: DEC_SECONDS
     })

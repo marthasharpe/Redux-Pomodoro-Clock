@@ -6,7 +6,9 @@ import {
     START_TIMER,
     STOP_TIMER,
     RESET_TIMER,
-    SWITCH_INTERVAL,
+    SWITCH_BREAK,
+    SWITCH_SESSION,
+    DEC_SECONDS
 } from '../actions/actCreators';
 
 const initialState = {
@@ -20,39 +22,31 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
     switch(action.type) {
         case INC_BREAK:
-            if (!state.timerRunning && state.breakLength < 60) {
-                return {
-                    ...state,
-                    breakLength: state.breakLength + 1,
-                }    
+            console.log('+')
+            return {
+                ...state,
+                breakLength: state.breakLength + 1,
             }
-            break;
         case DEC_BREAK:
-            if (!state.timerRunning && state.breakLength > 1) {
-                return {
-                    ...state,
-                    breakLength: state.breakLength - 1,
-                }    
-            }
-            break;
+            console.log('-')
+            return {
+                ...state,
+                breakLength: state.breakLength - 1,
+            }   
         case INC_SESSION:
-            if (!state.timerRunning && state.sessionLength < 60) {
-                return {
-                    ...state,
-                    sessionLength: state.sessionLength + 1,
-                    secondsLeft: (state.sessionLength + 1) * 60
-                }    
+            console.log('+')
+            return {
+                ...state,
+                sessionLength: state.sessionLength + 1,
+                secondsLeft: (state.sessionLength + 1) * 60
             }
-            break;
         case DEC_SESSION:
-        if (!state.timerRunning && state.sessionLength > 1) {
+            console.log('-')
             return {
                 ...state,
                 sessionLength: state.sessionLength - 1,
                 secondsLeft: (state.sessionLength - 1) * 60
-            }    
-        }
-        break;
+            }
         case START_TIMER:
             console.log('start')
             return {
@@ -64,20 +58,35 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 timerRunning: false,
-            }    
+            }
         case RESET_TIMER:
             console.log('reset')
             return {
+                ...state,
                 breakLength: 5,
                 sessionLength: 25,
                 interval: 'Session',
                 secondsLeft: 25 * 60,
                 timerRunning: false,
             }
-        case SWITCH_INTERVAL:
+        case SWITCH_BREAK:
             console.log('switch')
             return {
-                ...state
+                ...state,
+                interval: 'Break',
+                secondsLeft: state.breakLength * 60
+            }
+        case SWITCH_SESSION:
+            console.log('switch')
+            return {
+                ...state,
+                interval: 'Session',
+                secondsLeft: state.sessionLength * 60
+            }
+        case DEC_SECONDS:
+            return {
+                ...state,
+                secondsLeft: state.secondsLeft - 1
             }
         default:
             return state;

@@ -3,40 +3,39 @@ import './Timer.css';
 import { connect } from 'react-redux';
 import Reset from './Reset';
 import StartStop from './StartStop';
+import { switchBreak, switchSession, decSeconds } from '../actions/actCreators'
 
-const Timer = ({ timerRunning, secondsLeft, interval }) => {
+const Timer = ({ timerRunning, secondsLeft, interval, switchBreak, switchSession, decSeconds }) => {
 
     let minutes = Math.floor(secondsLeft / 60);
     let seconds = secondsLeft - minutes * 60;
 
     useEffect(() => {
-        // const handleSwitch = () => {
-        //     console.log('switch');
-        //     if (timerLabel === 'Session') {
-        //         setTimerLabel('Break');
-        //         setSecondsLeft(breakLength * 60);
-        //     } else if (timerLabel === 'Break') {
-        //         setTimerLabel('Session');
-        //         setSecondsLeft(sessionLength * 60);
-        //     }
-        // }
+        const handleSwitch = () => {
+            console.log('switch');
+            if (interval === 'Session') {
+                switchBreak();
+            } else if (interval === 'Break') {
+                switchSession();
+            }
+        }
         
-    //     let countdown = null;
-    //     if (timerRunning && secondsLeft > 0) {
-    //         countdown = setInterval(() => {
-    //             setSecondsLeft(secondsLeft - 1);
-    //         }, 1000);
-    //     } else if (timerRunning && secondsLeft === 0) {
-    //         countdown = setInterval(() => {
-    //             setSecondsLeft(secondsLeft - 1);
-    //         }, 1000);
-    //         handleSwitch();
-    //     } else {
-    //         clearInterval(countdown);
-    //     }
-    //     return () => clearInterval(countdown);
+        let countdown = null;
+        if (timerRunning && secondsLeft > 0) {
+            countdown = setInterval(() => {
+                decSeconds();
+            }, 1000);
+        } else if (timerRunning && secondsLeft === 0) {
+            countdown = setInterval(() => {
+                decSeconds();
+            }, 1000);
+            handleSwitch();
+        } else {
+            clearInterval(countdown);
+        }
+        return () => clearInterval(countdown);
     },
-    [timerRunning, secondsLeft]);
+    [timerRunning, secondsLeft, interval, switchBreak, switchSession, decSeconds]);
 
     return(
         <div className='timer-container'>
@@ -55,4 +54,10 @@ const mapStateToProps = ({ secondsLeft, timerRunning, interval }) => ({
     interval
 })
 
-export default connect(mapStateToProps, null)(Timer)
+const mapDispatchToProps = {
+    switchSession,
+    switchBreak,
+    decSeconds
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Timer)
