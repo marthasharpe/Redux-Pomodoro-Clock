@@ -4,9 +4,11 @@ import { connect } from 'react-redux';
 import Reset from './Reset';
 import StartStop from './StartStop';
 import { switchBreak, switchSession, decSeconds } from '../actions/actCreators'
+import soundfile from '../ride.wav'
 
 const Timer = ({ timerRunning, secondsLeft, interval, switchBreak, switchSession, decSeconds }) => {
 
+    const audio = new Audio(soundfile);
     let minutes = Math.floor(secondsLeft / 60);
     let seconds = secondsLeft - minutes * 60;
 
@@ -29,13 +31,14 @@ const Timer = ({ timerRunning, secondsLeft, interval, switchBreak, switchSession
             countdown = setInterval(() => {
                 decSeconds();
             }, 1000);
+            audio.play();
             handleSwitch();
         } else {
             clearInterval(countdown);
         }
         return () => clearInterval(countdown);
     },
-    [timerRunning, secondsLeft, interval, switchBreak, switchSession, decSeconds]);
+    [timerRunning, secondsLeft, interval, switchBreak, switchSession, decSeconds, audio]);
 
     return(
         <div className='timer-container'>
