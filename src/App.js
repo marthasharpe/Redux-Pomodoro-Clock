@@ -7,7 +7,7 @@ import Timer from './components/Timer';
 const App = () => {
     return (
         <div className='App-container'>
-            <h1>React-Redux Pomodoro Clock</h1>
+            <h1 style={{color: 'greenyellow'}}>React-Redux Pomodoro Clock</h1>
             <div className='set-time-container'>
                 <SessionTime />
                 <BreakTime />
